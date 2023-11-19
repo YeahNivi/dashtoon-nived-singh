@@ -1,0 +1,33 @@
+body {
+    background: linear-gradient(to bottom, #333333, #111111); /* Dark gray gradient */
+  }
+  
+  .loader {
+    border: 8px solid #333; /* Dark gray */
+    border-top: 8px solid rgba(255, 255, 255, 0.6); /* White60 */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite; /* Circular motion */
+    margin: 0 auto;
+    margin-bottom: 10px;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* Additional styling for the generated image */
+  .generated-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Adjust image size dynamically based on screen height */
+  @media (min-height: 600px) {
+    .generated-image {
+      height: 25vh; /* Use 1/10th of the viewport height */
+    }
+  }
+  
