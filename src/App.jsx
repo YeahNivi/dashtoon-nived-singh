@@ -24,18 +24,28 @@ function App() {
   };
 
   const handleDelete = () => {
-    setImages((prevImages) => {
-      const newImages = [...prevImages];
-      newImages.pop(); // Remove the latest image
-      return newImages;
-    });
-    setTitles((prevTitles) => {
-      const newTitles = [...prevTitles];
-      newTitles.pop(); // Remove the latest title
-      return newTitles;
-    });
-    setCurrentInputIndex((prevIndex) => Math.max(0, prevIndex - 1)); // Decrement current input index
-    setError(null); // Clear any previous errors when deleting
+    if (currentInputIndex > 0) {
+      setImages((prevImages) => {
+        const newImages = [...prevImages];
+        newImages.pop(); // Remove the latest image
+        return newImages;
+      });
+  
+      setTitles((prevTitles) => {
+        const newTitles = [...prevTitles];
+        newTitles.pop(); // Remove the latest title
+        return newTitles;
+      });
+  
+      setLoadedImages((prevLoadedImages) => {
+        const newLoadedImages = [...prevLoadedImages];
+        newLoadedImages.pop(); // Remove the latest loaded image
+        return newLoadedImages;
+      });
+  
+      setCurrentInputIndex((prevIndex) => prevIndex - 1); // Decrement current input index
+      setError(null); // Clear any previous errors when deleting
+    }
   };
 
   async function query(data, index) {
@@ -102,17 +112,24 @@ function App() {
       />
     </div>
     <div className='p-4 flex flex-col items-center'>
+      <div className="flex">
         <Button onClick={handleSubmit} disabled={isLoading}>
           {isLoading ? <Spinner /> : 'Submit'}
         </Button>
         {currentInputIndex > 0 && (
-          <Button onClick={handleDelete} className="mt-2">
+          <Button onClick={handleDelete} className="ml-2">
             Delete Latest
           </Button>
         )}
-        {error && <p className="text-red-500 mt-2">{error}</p>}
+        {currentInputIndex >= 10 && (
+          <Button onClick={handleReset} className="ml-2">
+            Reset
+          </Button>
+        )}
       </div>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
+  </div>
   );
 }
 
