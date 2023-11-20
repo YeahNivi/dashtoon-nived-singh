@@ -43,7 +43,7 @@ function App() {
         return newLoadedImages;
       });
   
-      setCurrentInputIndex((prevIndex) => prevIndex - 1); // Decrement current input index
+      setCurrentInputIndex((prevIndex) => Math.max(0, prevIndex - 1)); // Decrement current input index
       setError(null); // Clear any previous errors when deleting
     }
   };

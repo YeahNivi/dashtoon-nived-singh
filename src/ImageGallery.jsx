@@ -1,4 +1,3 @@
-// ImageGallery.js
 import React, { useState } from 'react';
 
 function ImageGallery({ images }) {
@@ -9,13 +8,13 @@ function ImageGallery({ images }) {
   };
 
   return (
-    <div className='grid grid-cols-5 gap-4'>
+    <div className='grid grid-cols-5 gap-4 p-4 bg-gray-800 rounded-md'>
       {images.map((image, index) => (
-        <div key={index} className='col-span-1 flex items-center justify-center'>
+        <div key={index} className={`col-span-1 flex items-center justify-center p-4 border border-gray-700 rounded-md ${loadedImages.includes(index) ? 'opacity-100' : 'opacity-0'}`}>
           <img
             src={image}
             alt={`Generated Comic ${index + 1}`}
-            className={`rounded-lg max-w-full max-h-full ${loadedImages.includes(index) ? 'opacity-100' : 'opacity-0'}`}
+            className='rounded-lg max-w-full max-h-full'
             onLoad={() => handleImageLoad(index)}
           />
         </div>
@@ -25,4 +24,5 @@ function ImageGallery({ images }) {
 }
 
 export default ImageGallery;
+
 
